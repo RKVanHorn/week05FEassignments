@@ -1,4 +1,7 @@
-
+/*create a menu app that uses at least one array, two classes and allows for
+create, view and delete*/
+/* My idea is an app that lets you keep track of Animal trainers and the animals
+they train including their species.*/
 
 class Animal {
     constructor(name, species) {
@@ -27,8 +30,8 @@ class Trainer {
         }
     }
 
-    describe() {
-        return `${this.name} is currently training ${this.animals.length} animal(s).`;
+    describe() { 
+      return  this.animals.length == 0 ? `` : this.animals.length>1 ? `${this.name} is currently training ${this.animals.length} animals.` : `${this.name} is currently training ${this.animals.length} animal.`;
     }
 }
 
@@ -92,7 +95,9 @@ class Menu {
         // } 
         //Want to make this shorter try .forEach
         this.trainers.forEach((trainer, index) => {
-            trainerString += `${index +1}) ${trainer.name} is currently training ${trainer.animals.length} animal(s)` +"\n"
+            trainerString += trainer.animals.length == 0 || trainer.animals.length>1 ? `${index +1}) ${trainer.name} is currently training ${trainer.animals.length} animals.` +"\n" 
+            : `${index +1}) ${trainer.name} is currently training ${trainer.animals.length} animal.` +"\n";
+            //`${index +1}) ${trainer.name} is currently training ${trainer.animals.length} animal(s)` +"\n"  
         })
         alert(trainerString);
     }
@@ -103,7 +108,7 @@ class Menu {
     }
 
     viewTrainer(){
-        //again with the list that starts at 1
+        //again with the list that starts at 1 instead of 0 like the index
         let listOfTrainers = ``;
         this.trainers.forEach((trainer, index) => {
             listOfTrainers +=  `${index + 1}) ${trainer.name}
@@ -134,11 +139,11 @@ class Menu {
         } 
     }
 
-    deleteTrainer(){
+    deleteTrainer(){ //I wanted that list starting from 1 again
         let delListOfTrainers = ``;
         this.trainers.forEach((trainer, index) => { //put +1 after index
-            delListOfTrainers +=  `${index + 1}) ${trainer.name}
-        `;
+            delListOfTrainers +=  `${index + 1}) ${trainer.name} 
+        `;  
         })
         let index = prompt(`
         Enter the number of the trainer that you wish to delete:
